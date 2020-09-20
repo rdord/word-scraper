@@ -4,10 +4,12 @@ const cheerio = require('cheerio');
 const allWords = [];
 
 async function app() {
+  // TODO: get all 4884 pages
   const pageText = await getPage(1);
   const pageWords = parseText(pageText);
 
-  // console.log(pageWords);
+  // TODO: concat arrays for all pages into one
+  // TODO: remove words with 1 and 2 letters
 }
 
 async function getPage(page = 1) {
@@ -26,11 +28,17 @@ function parseText(text) {
     const word = $(el).children('.font_xlarge').children('a').html();
     $(el).find('.entry-citation').remove();
 
-    const wordObj = { id: i, word, content: $(el).text().replace(/\s\s+/g, '') };
+    // TODO: parse content
+    const wordObj = { id: i, word, content: $(el).html().replace(/\s\s+/g, '') };
     console.log(wordObj);
   });
+
+  // TODO: save to array and return
 }
 
-function saveToJSON() {}
+function saveToJSON() {
+  // TODO: normalize data
+  // TODO: save data to a json file
+}
 
 app();

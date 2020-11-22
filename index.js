@@ -5,9 +5,9 @@ const allWords = [];
 
 async function app() {
   // TODO: get all 4884 pages
-  const pageText = await getPage(4);
+  const pageText = await getPage(1);
   const pageWords = parseText(pageText);
-  // console.log(pageWords);
+  console.log(pageWords);
 
   // TODO: concat arrays for all pages into one
   // TODO: remove words with 1 and 2 letters
@@ -33,9 +33,9 @@ function parseText(text) {
 
     $(el).find('.entry-citation').remove();
 
-    console.log(word);
-    console.log(type);
-    console.log('\n###############################################\n');
+    // console.log(word);
+    // console.log(type);
+    // console.log('\n###############################################\n');
 
     // TODO: parse content
     wordsArray = [
@@ -43,13 +43,13 @@ function parseText(text) {
       {
         id: i,
         word,
-        type
-        content: $(el).html().replace(/\s\s+/g, ''),
+        type,
+        content: $(el).html().replace(/\s\s+/g, '')
       }
     ];
   });
 
-  return wordsArray;
+  return wordsArray.filter(item => !!item.type && item.word.length > 2);
 }
 
 function saveToJSON() {
